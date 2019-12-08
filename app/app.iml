@@ -25,7 +25,7 @@
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/debug/kotlin;/home/higero/AndroidStudioProjects/QiitaAPI/app/src/debug/java;/home/higero/AndroidStudioProjects/QiitaAPI/app/src/release/kotlin;/home/higero/AndroidStudioProjects/QiitaAPI/app/src/release/java;/home/higero/AndroidStudioProjects/QiitaAPI/app/src/debugAndroidTest/kotlin;/home/higero/AndroidStudioProjects/QiitaAPI/app/src/debugUnitTest/kotlin;/home/higero/AndroidStudioProjects/QiitaAPI/app/src/releaseUnitTest/kotlin">
+      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/debug/kotlin;/home/higero/AndroidStudioProjects/QiitaAPITest/app/src/debug/java;/home/higero/AndroidStudioProjects/QiitaAPITest/app/src/release/kotlin;/home/higero/AndroidStudioProjects/QiitaAPITest/app/src/release/java;/home/higero/AndroidStudioProjects/QiitaAPITest/app/src/debugAndroidTest/kotlin;/home/higero/AndroidStudioProjects/QiitaAPITest/app/src/debugUnitTest/kotlin;/home/higero/AndroidStudioProjects/QiitaAPITest/app/src/releaseUnitTest/kotlin">
         <compilerSettings>
           <option name="additionalArguments" value="-Xallow-no-source-files" />
         </compilerSettings>
