@@ -1,6 +1,6 @@
 package com.example.qiitaapi.Model
 
-data class Item (
+data class Item(
     val id: String?,
     val title: String?,
     val body: String?,
@@ -9,4 +9,4 @@ data class Item (
     val likes_count: Int?,
     val created_at: String?,
     val user: User?
-    )
+)
