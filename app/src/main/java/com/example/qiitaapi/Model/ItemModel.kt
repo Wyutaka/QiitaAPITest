@@ -1,6 +1,6 @@
 package com.example.qiitaapi.Model
 
-data class Item(
+data class ItemModel(
     val id: String?,
     val title: String?,
     val body: String?,

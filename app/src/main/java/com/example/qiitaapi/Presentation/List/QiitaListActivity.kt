@@ -1,34 +1,51 @@
 package com.example.qiitaapi.Presentation.List
 
+import LifecycleScope
+import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.qiitaapi.Model.CardModel
+import com.example.qiitaapi.Model.ItemModel
 import com.example.qiitaapi.R
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_qiita_list.*
 
-class QiitaListActivity : AppCompatActivity(), QiitaListRecyclerViewHolder.ItemClickListner {
-    private lateinit var qiitaListRecyclerView: RecyclerView
+class QiitaListActivity : AppCompatActivity(), QiitaListView {
     private lateinit var qiitaListRecyclerViewAdapter: QiitaListRecyclerViewAdapter
-
-    val list =
-        arrayListOf(CardModel("kusa", "kusa"), CardModel("kusa", "kusa"), CardModel("kusa", "kusa"))
+    private lateinit var qiitaListRecyclerView: RecyclerView
+    private lateinit var presenter: QiitaListPresenter
+    override val scope = LifecycleScope(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qiita_list)
+        presenter = QiitaListPresenter(this, this)
 
         qiitaListRecyclerView = qiita_item_list
-        qiitaListRecyclerView.adapter = QiitaListRecyclerViewAdapter(this, this, list)
+        qiitaListRecyclerViewAdapter = QiitaListRecyclerViewAdapter(this, this)
+        qiitaListRecyclerView.adapter = qiitaListRecyclerViewAdapter
         qiitaListRecyclerView.layoutManager = LinearLayoutManager(this)
+        edit_text.setOnKeyListener(presenter.OnKeyListener())
     }
 
-    override fun onItemClick(view: View, position: Int) {
-        Toast.makeText(applicationContext, "position $position was tapped", Toast.LENGTH_SHORT).show()
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
+
+    override fun showDetail(view: View, position: Int) {
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(
+            this,
+            Uri.parse(qiitaListRecyclerViewAdapter.getItem(position).url)
+        )
+    }
+
+    override fun showList(list: List<ItemModel>) {
+        qiitaListRecyclerViewAdapter.update(list)
     }
 
 }

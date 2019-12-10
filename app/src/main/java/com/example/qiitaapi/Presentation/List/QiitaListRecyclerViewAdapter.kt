@@ -3,17 +3,19 @@ package com.example.qiitaapi.Presentation.List
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.qiitaapi.Model.CardModel
+import com.example.qiitaapi.Model.ItemModel
 import com.example.qiitaapi.R
+import com.squareup.picasso.Picasso
 
 class QiitaListRecyclerViewAdapter(
     private val context: Context,
-    private val itemClickListner: QiitaListRecyclerViewHolder.ItemClickListner,
-    private val itemList: List<CardModel>
+    private val itemClickListner: QiitaListView
 ) : RecyclerView.Adapter<QiitaListRecyclerViewHolder>() {
 
     private var qiitalistRecyclerView: RecyclerView? = null
+    private val itemModelList: MutableList<ItemModel> = mutableListOf()
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
@@ -28,14 +30,20 @@ class QiitaListRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: QiitaListRecyclerViewHolder, position: Int) {
         holder.let {
-            it.itemTitle.text = itemList.get(position).itemTitle
-            it.userName.text = itemList.get(position).userName
-            it.itemIcon.setImageResource(R.mipmap.ic_launcher)
+            it.itemTitle.text = itemModelList.get(position).title
+            it.userName.text = itemModelList.get(position).user.toString()
+            Picasso.with(context).load(itemModelList.get(position).user?.profile_image_url)
+                .into(it.itemIcon)
         }
     }
 
     override fun getItemCount(): Int {
-        return itemList.size
+        return itemModelList.size
+    }
+
+    // アイテムを取得してみる
+    fun getItem(position: Int): ItemModel {
+        return itemModelList.get(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QiitaListRecyclerViewHolder {
@@ -45,11 +53,33 @@ class QiitaListRecyclerViewAdapter(
 
         mView.setOnClickListener { view ->
             qiitalistRecyclerView?.let {
-                itemClickListner.onItemClick(view, it.getChildAdapterPosition(view))
+                itemClickListner.showDetail(view, it.getChildAdapterPosition(view))
             }
         }
 
         return QiitaListRecyclerViewHolder(mView)
+    }
+
+    fun update(aNew: List<ItemModel>) {
+        val diffResult = DiffUtil.calculateDiff(RecyclerDiffCallback(itemModelList, aNew))
+        itemModelList.clear()
+        itemModelList.addAll(aNew)
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    private class RecyclerDiffCallback(
+        private val old: List<ItemModel>,
+        private val aNew: List<ItemModel>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int = old.size
+
+        override fun getNewListSize(): Int = aNew.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            old[oldItemPosition].title == aNew[newItemPosition].title
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            old[oldItemPosition] == aNew[newItemPosition]
     }
 
 }
