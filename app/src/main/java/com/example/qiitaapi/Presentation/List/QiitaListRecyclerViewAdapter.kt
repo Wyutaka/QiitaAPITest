@@ -49,7 +49,7 @@ class QiitaListRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QiitaListRecyclerViewHolder {
 
         val layoutInflater = LayoutInflater.from(context)
-        val mView = layoutInflater.inflate(R.layout.list_item, parent, false)
+        val mView = layoutInflater.inflate(R.layout.card_list_item, parent, false)
 
         mView.setOnClickListener { view ->
             qiitalistRecyclerView?.let {

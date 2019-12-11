@@ -1,7 +1,6 @@
 package com.example.qiitaapi.Presentation.List
 
 import android.content.Context
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -31,7 +30,6 @@ class QiitaListPresenter(
             inputMethodManager.hideSoftInputFromWindow(editText.windowToken, 0)
 
             var text = searchText.text.toString()
-            Log.d("test", text)
             view?.bindLaunch {
                 val list = qiitaRepository.getlist(text)
                 view?.showList(list)

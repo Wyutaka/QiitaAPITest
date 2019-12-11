@@ -7,14 +7,14 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.qiitaapi.Model.ItemModel
 import com.example.qiitaapi.R
+import com.example.qiitaapi.Util.CardRecyclerView
 import kotlinx.android.synthetic.main.activity_qiita_list.*
 
 class QiitaListActivity : AppCompatActivity(), QiitaListView {
     private lateinit var qiitaListRecyclerViewAdapter: QiitaListRecyclerViewAdapter
-    private lateinit var qiitaListRecyclerView: RecyclerView
+    private lateinit var qiitaListRecyclerView: CardRecyclerView
     private lateinit var presenter: QiitaListPresenter
     override val scope = LifecycleScope(this)
 

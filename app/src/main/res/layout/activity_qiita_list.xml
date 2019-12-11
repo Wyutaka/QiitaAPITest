@@ -13,7 +13,7 @@
         android:hint="@string/keyword"
         android:inputType="text" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.example.qiitaapi.Util.CardRecyclerView
         android:id="@+id/qiita_item_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
