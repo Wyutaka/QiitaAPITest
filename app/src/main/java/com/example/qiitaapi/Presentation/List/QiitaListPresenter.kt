@@ -18,6 +18,13 @@ class QiitaListPresenter(
         view = null
     }
 
+    fun showList(text: String) {
+        view?.bindLaunch {
+            val list = qiitaRepository.getlist(text)
+            view?.showList(list)
+        }
+    }
+
     inner class OnKeyListener : View.OnKeyListener {
         override fun onKey(editText: View?, keyCode: Int, keyEvent: KeyEvent): Boolean {
             if (keyEvent.action != KeyEvent.ACTION_UP || keyCode != KeyEvent.KEYCODE_ENTER) {
@@ -37,6 +44,5 @@ class QiitaListPresenter(
             return true
         }
     }
-
 
 }
