@@ -3,7 +3,9 @@ package com.example.qiitaapi.Presentation.List
 import LifecycleScope
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +29,17 @@ class QiitaListActivity : AppCompatActivity(), QiitaListView {
         qiitaListRecyclerViewAdapter = QiitaListRecyclerViewAdapter(this, this)
         qiitaListRecyclerView.adapter = qiitaListRecyclerViewAdapter
         qiitaListRecyclerView.layoutManager = LinearLayoutManager(this)
-        edit_text.setOnKeyListener(presenter.OnKeyListener())
+        search_menu_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("test", "test")
+                presenter.showList(requireNotNull(newText))
+                return true
+            }
+        })
     }
 
     override fun onDestroy() {
