@@ -3,7 +3,6 @@ package com.example.qiitaapi.Presentation.List
 import LifecycleScope
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -31,12 +30,11 @@ class QiitaListActivity : AppCompatActivity(), QiitaListView {
         qiitaListRecyclerView.layoutManager = LinearLayoutManager(this)
         search_menu_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                presenter.showList(requireNotNull(query))
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.d("test", "test")
-                presenter.showList(requireNotNull(newText))
                 return true
             }
         })

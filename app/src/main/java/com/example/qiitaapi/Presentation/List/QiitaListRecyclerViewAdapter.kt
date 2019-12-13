@@ -31,7 +31,8 @@ class QiitaListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: QiitaListRecyclerViewHolder, position: Int) {
         holder.let {
             it.itemTitle.text = itemModelList.get(position).title
-            it.userName.text = itemModelList.get(position).user.toString()
+            it.userName.text = itemModelList.get(position).user?.name.toString()
+            it.likes.text = itemModelList.get(position).likes_count.toString()
             Picasso.with(context).load(itemModelList.get(position).user?.profile_image_url)
                 .into(it.itemIcon)
         }

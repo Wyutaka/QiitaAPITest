@@ -11,4 +11,5 @@ class QiitaListRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val itemIcon: ImageView = view.findViewById(R.id.item_icon)
     val itemTitle: TextView = view.findViewById(R.id.item_title)
     val userName: TextView = view.findViewById(R.id.user_name)
+    val likes: TextView = view.findViewById(R.id.likes)
 }
